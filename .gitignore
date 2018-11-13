@@ -29,3 +29,11 @@
 
 # Ignore master key for decrypting credentials and more.
 /config/master.key
+db/schema.rb
+
+# Ignore application configuration
+/config/application.yml
+
+config/settings.local.yml
+config/settings/*.local.yml
+config/environments/*.local.yml
