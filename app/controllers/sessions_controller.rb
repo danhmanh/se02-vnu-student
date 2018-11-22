@@ -6,21 +6,21 @@ class SessionsController < ApplicationController
   def create
     result = log_in_vnu
     if result.uri.to_s == "#{Settings.base_url}dang-nhap"
-      flash.now[:danger] = "Tên người dùng / mật khẩu không chính xác"
+      flash.now[:danger] = "Invalid username/password combination"
       render :new
     elsif result.uri.to_s.eql? Settings.base_url
-      flash[:success] = "Đăng nhập thành công !"
+      flash[:success] = "Login successfully!"
       log_in result
       redirect_to root_url
     else
-      flash[:danger] = "Đã có sự cố xảy ra."
+      flash[:danger] = "Something went wrong."
       redirect_to root_url
     end
   end
 
   def destroy
     log_out
-    flash[:success] = "Bạn đã đăng xuất thành công"
+    flash[:success] = "Logout successfully!"
     redirect_to root_url
   end
 end

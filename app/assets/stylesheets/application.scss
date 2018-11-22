@@ -1,2 +1,19 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
+
+.txt-content {
+  resize: vertical;
+}
+
+.comment {
+  margin-bottom: 20px;
+}
+
+.username {
+  font-weight: bold;
+}
+
+.time-ago {
+  color: #8a7a7a;
+  font-size: 13px;
+}

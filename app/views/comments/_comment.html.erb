@@ -1,0 +1,10 @@
+<div class="comment">
+  <div class="username"><%= comment.user.name %></div>
+  <em class="time-ago"><%= time_ago_in_words(comment.created_at) %> ago</em>
+  <p class="comment-content"><%= comment.content %></p>
+
+  <% if comment.user_id == current_user.id %>
+    <%= link_to "Edit", edit_post_comment_path(comment.post, comment) %>
+    <%= link_to "Delete", post_comment_path(comment.post, comment), method: :delete, data: { confirm: "Are you sure?" } %>
+  <% end %>
+</div>
