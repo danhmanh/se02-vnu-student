@@ -1,0 +1,17 @@
+<% if @comment.user_id == current_user.id %>  
+  <div class="col-md-8 col-md-offset-2">
+    <div class="well">
+      <h1>Edit comment</h1>
+      <%= form_for ([@post, @comment]) do |f| %>
+        <%= f.text_area :content, rows: 3, class: "form-control txt-content" %><br>
+        <div class="btn-group">
+          <%= link_to "Back", :back, class: "btn btn-info" %>
+          <%= f.submit "Submit", class: "btn btn-primary" %>
+        </div>
+      <% end %>
+    </div>
+  </div>
+<% else %>
+  <% flash.now[:danger] = "You can not edit this comment." %>
+  <%= link_to "Back", @post, class: "btn btn-info" %>
+<% end %>

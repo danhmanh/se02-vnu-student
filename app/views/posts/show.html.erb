@@ -1,0 +1,19 @@
+<div class="col-md-10 col-md-offset-1">
+  <h4 class="username"><%= @post.user.name %></h4>
+  <em class="time-ago"><%= time_ago_in_words(@post.created_at) %> ago</em>
+  <p><%= @post.content %></p>
+
+  <div class="btn-group">
+    <%= link_to "Back", root_path%>
+    <% if current_user.id == @post.user_id %>
+      <%= link_to "Edit", edit_post_path %>
+      <%= link_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure?" } %>
+    <% end %>
+  </div>
+
+  <h4><%= pluralize @post.comments.count, " comment" %></h4>
+  <div class="comment"><%= render @post.comments %></div>
+
+  <h3>Comment:</h3>
+  <%= render "comments/form" %>
+</div>
