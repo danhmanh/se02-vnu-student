@@ -2,8 +2,15 @@
   <h4 class="username"><%= @post.user.name %></h4>
   <em class="time-ago"><%= time_ago_in_words(@post.created_at) %> ago</em>
   <p><%= @post.content %></p>
+  <p><%= pluralize(@post.likes.count, "like")%></p>
 
   <div class="btn-group">
+    <% pre_like = @post.likes.find { |like| like.user_id == current_user.id} %>
+    <% if pre_like %>
+      <%= button_to "Unlike", post_like_path(@post, pre_like), class: "btn btn-primary", method: :delete %>
+    <% else %>
+      <%= button_to "Like", post_likes_path(@post), class: "btn btn-primary", method: :post %>
+    <% end %>>
     <%= link_to "Back", root_path%>
     <% if current_user.id == @post.user_id %>
       <%= link_to "Edit", edit_post_path %>
