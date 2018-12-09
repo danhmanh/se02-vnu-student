@@ -4,6 +4,7 @@
       <h4 class="username"><%= post.user.name %></h4>
       <em class="time-ago"><%= link_to time_ago_in_words(post.created_at) + " ago", post_path(post) %></em>
       <p><%= truncate(post.content, length: 100) %></p>
+      <p><%= pluralize(post.likes.count, "like")%></p>
     </div>
   <% end %>
   <%= paginate @posts, theme: "twitter-bootstrap-3" %>

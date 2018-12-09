@@ -37,3 +37,6 @@ db/schema.rb
 config/settings.local.yml
 config/settings/*.local.yml
 config/environments/*.local.yml
+
+# Ignore IDEA hidden files
+.idea/
