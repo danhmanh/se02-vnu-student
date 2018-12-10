@@ -1,0 +1,28 @@
+$(document).on('turbolinks:load', function() {
+  <% @course_details.each do |klass| %>
+    course_cell = $("#T<%= klass.day_of_week %>-t<%= klass.start_time %>");
+    console.log(course_cell);
+    course_cell.html(
+      "<h5><%= j klass.course.name %></h5> \
+        <p><%= j klass.room_name %></p> "
+    );
+    course_cell.attr("colspan", "<%= klass.duration %>");
+    course_cell.css("background-color", "lightblue");
+  <% end %>
+
+  for (let day = 2; day <= 7; day++) {
+    for(let time = 1; time <= 10; time++) {
+      merge_cell(day, time);
+    }
+  }
+
+  function merge_cell(day, time) {
+    element = $("#T" + day + "-t"+ time);
+    colspan = element.attr("colspan");
+    for (let index = 1; index < colspan; index++) {
+      element = element.next();
+      element.hide();
+    }
+  }
+
+});
