@@ -25,6 +25,7 @@ module SessionsHelper
     user = User.find_by_str_id str_id
     user = User.create str_id: str_id, name: name if user.nil?
     session[:str_id] = user.str_id
+    cookies.signed[:str_id] = user.str_id
   end
 
   def log_out
