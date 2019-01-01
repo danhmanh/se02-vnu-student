@@ -25,3 +25,37 @@ td {
   white-space: -o-pre-wrap;
   word-wrap: break-word;
 }
+
+ul {
+  padding-left: 0px;
+  list-style: none;
+}
+
+.messages-list {
+  max-height: 200px;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.message-sent {
+  position: relative;
+  background-color: #3578e5;
+  color: #fff;
+  margin: 1px 20px;
+  padding: 3px 10px;
+  border-radius: 30px;
+  float: right;
+}
+
+.message-received {
+  background-color: #f1f1f1;
+  margin: 1px 20px;
+  padding: 3px 10px;
+  border-radius: 30px;
+  float: left;
+}
+
+.text-area {
+  resize: vertical;
+  margin: 10px 0 0 0;
+}
