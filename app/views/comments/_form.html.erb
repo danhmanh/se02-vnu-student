@@ -1,4 +1,0 @@
-<%= form_for ([@post, @post.comments.build]) do |f| %>
-  <%= f.text_area :content, rows: 4, class: "form-control txt-content", required: true %><br>
-  <%= f.submit "Submit", class: "btn btn-primary" %>
-<% end %>

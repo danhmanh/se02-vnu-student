@@ -1,0 +1,30 @@
+<div class="row">
+  <aside class="col-md-3">
+    <section class="user_info">
+      <div class="profile">
+        <div class="avatar">
+          <% if @user.avatar? %>
+            <%= image_tag @user.avatar.url %>
+          <% else %>
+            <%= gravatar_for @user, size: 150 %>
+          <% end %>
+        </div>
+        <div class="username"><%= @user.name %></div>
+
+        <% if @user.id == current_user.id %>
+          <%= render "user_form" %>
+        <% end%>
+      </div>
+    </section>
+  </aside>
+
+  <div class="col-md-9">
+    <% if @user.posts.any? %>
+      <div class="post-title">Posts (<%= @user.posts.count %>)</div>
+      <ol class="posts">
+        <%= render @posts %>
+      </ol>
+      <%= paginate @posts, theme: "twitter-bootstrap-3" %>
+    <% end %>
+  </div>
+</div>

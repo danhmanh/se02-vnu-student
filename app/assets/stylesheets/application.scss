@@ -1,21 +1,15 @@
 @import "bootstrap-sprockets";
 @import "bootstrap";
 
-.txt-content {
-  resize: vertical;
-}
-
 .comment {
   margin-bottom: 20px;
 }
 
 .username {
-  font-weight: bold;
-}
-
-.time-ago {
-  color: #8a7a7a;
-  font-size: 13px;
+  font-size: 20px;
+  a {
+    text-decoration: none;
+  }
 }
 
 td {
@@ -57,5 +51,138 @@ ul {
 
 .text-area {
   resize: vertical;
+}
+
+.new_message .text-area {
   margin: 10px 0 0 0;
+}
+
+.posts {
+  list-style: none;
+  padding: 0;
+  li {
+    padding: 10px 0;
+    border-top: 1px solid #e8e8e8;
+  }
+  .user {
+    margin-top: 5em;
+    padding-top: 0;
+    a {
+      text-decoration: none;
+    }
+  }
+  .content {
+    margin: 5px 0;
+    display: block;
+    img {
+      display: block;
+      padding: 5px 0;
+    }
+  }
+}
+
+.post-content {
+  margin: 5px 0;
+  display: block;
+  img {
+    display: block;
+    padding: 5px 0;
+  }
+}
+
+.post-title {
+  font-size: 24px;
+}
+
+.timestamp {
+  font-style: italic;
+  display: block;
+  font-size: 12px;
+  color: $gray-light;
+  a {
+    color: $gray-light;
+    &:hover {
+      text-decoration: none;
+    }
+  }
+}
+
+aside {
+  textarea {
+    height: 100px;
+    margin-bottom: 5px;
+  }
+}
+
+#error_explanation {
+  color: red;
+  ul {
+    color: red;
+    margin: 0 0 30px 0;
+  }
+}
+
+.field_with_errors {
+  @extend .has-error;
+  .form-control {
+    color: $state-danger-text;
+  }
+}
+
+span.user {
+  font-weight: 500;
+  font-size: 18px;
+}
+
+.picture input {
+  margin-bottom: 5px;
+}
+
+.like-btn .like img {
+  width: 16px;
+}
+
+.comments {
+  margin-top: 10px;
+  .comment-title {
+    font-size: 17px;
+  }
+  #comment {
+    margin: 10px 0;
+    .user-name {
+      margin: 5px 0;
+    }
+  }
+  .current-comment {
+    border-top: 1px solid #e8e8e8;
+    &:first-child {
+      border: none;
+    }
+  }
+}
+
+.gravatar, .img-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+}
+
+.profile {
+  text-align: center;
+  .avatar {
+    margin-bottom: 5px;
+    img {
+      border-radius: 50%;
+      width: 150px;height: 150px;
+    }
+  }
+}
+
+.picture-field {
+  margin: 5px 0;
+}
+
+.gravatar-user {
+  float: left;
+  margin-right: 5px;
 }

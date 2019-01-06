@@ -1,26 +1,57 @@
 <div class="col-md-10 col-md-offset-1">
-  <h4 class="username"><%= @post.user.name %></h4>
-  <em class="time-ago"><%= time_ago_in_words(@post.created_at) %> ago</em>
-  <p><%= @post.content %></p>
-  <p><%= pluralize(@post.likes.count, "like")%></p>
+  <div class="user">
+    <div class="gravatar-user">
+      <% if @post.user.avatar? %>
+        <%= image_tag @post.user.avatar.thumb.url, class: "img-avatar" %>
+      <% else %>
+        <%= gravatar_for @post.user, size: 40 %>
+      <% end %>
+    </div>
+    <%= link_to @post.user.name, user_path(@post.user) %>
 
-  <div class="btn-group">
-    <% pre_like = @post.likes.find { |like| like.user_id == current_user.id} %>
-    <% if pre_like %>
-      <%= button_to "Unlike", post_like_path(@post, pre_like), class: "btn btn-primary", method: :delete %>
-    <% else %>
-      <%= button_to "Like", post_likes_path(@post), class: "btn btn-primary", method: :post %>
-    <% end %>>
-    <%= link_to "Back", root_path%>
-    <% if current_user.id == @post.user_id %>
-      <%= link_to "Edit", edit_post_path %>
-      <%= link_to "Delete", post_path(@post), method: :delete, data: { confirm: "Are you sure?" } %>
-    <% end %>
+    <span class="timestamp">
+      Posted <%= time_ago_in_words(@post.created_at) %> ago.
+    </span>
   </div>
 
-  <h4><%= pluralize @post.comments.count, " comment" %></h4>
-  <div class="comment"><%= render @post.comments %></div>
+  <div class="post-content">
+    <div><%= @post.content %></div>
+    <div><%= image_tag @post.picture.url if @post.picture? %></div>
+  </div>
 
-  <h3>Comment:</h3>
-  <%= render "comments/form" %>
+  <div class="like-btn">
+    <% pre_like = @post.likes.find { |like| like.user_id == current_user.id} %>
+
+    <% if pre_like %>
+      <%= link_to image_tag("liked.svg"), post_like_path(@post, pre_like), class: "like", method: :delete, remote: true %>
+    <% else %>
+      <%= link_to image_tag("like.svg"), post_likes_path(@post), class: "like", method: :post, remote: true %>
+    <% end %>
+
+    <span class="counter" id="@post-counter-<%= @post.id %>">
+      <%= pluralize(@post.likes.count, "like") %>
+    </span>
+  </div>
+
+  <div class="edit-post">
+    <% if current_user.id == @post.user_id %>
+      <%= link_to "Edit", edit_post_path(@post), remote: true %>
+      <%= link_to "Delete", @post, method: :delete, remote: true, data: { confirm: "Are you sure?" } %>
+    <% end %>
+    <div id="post-id-<%= @post.id %>"></div>
+  </div>
+
+  <div class="comments">
+    <div class="comment-title">Comments (<%= @post.comments.count %>):</div>
+
+    <div class="comment-form">
+      <%= render "comments/comment_form", post: @post, comment: @post.comments.build %>
+    </div>
+
+    <div class="comment-content" id= "comments_<%= @post.id %>">
+      <% if @post.comments.present? %>
+        <%= render @post.comments, post: @post %>
+      <% end %>
+    </div>
+  </div>
 </div>

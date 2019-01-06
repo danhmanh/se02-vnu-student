@@ -15,9 +15,9 @@
       <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
         <ul class="nav navbar-nav">
           <% if logged_in? %>
-            <li><%= link_to "New Post", new_post_path %></li>
             <li><%= link_to "Get timetable", timetable_path %></li>
             <li><%= link_to "Chat room", chatroom_path %></li>
+            <li><%= link_to "Profile", user_path(current_user) %></li>
           <% end %>
         </ul>
         <ul class="nav navbar-nav navbar-right">
