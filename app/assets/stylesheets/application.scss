@@ -186,3 +186,26 @@ span.user {
   float: left;
   margin-right: 5px;
 }
+
+.stats {
+  overflow: auto;
+  margin: 5px 0;
+  padding: 0;
+  a {
+    padding: 0 10px;
+    border-left: 1px solid $gray-lighter;
+    color: #333;
+    &:first-child {
+      padding-left: 0;
+      border: 0;
+    }
+    &:hover {
+      text-decoration: none;
+      color: blue;
+    }
+  }
+}
+
+.users.follow {
+  padding: 0;
+}

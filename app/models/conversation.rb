@@ -5,6 +5,7 @@ class Conversation < ApplicationRecord
 
   validates :sender_id, uniqueness: { scope: :recipient_id }
 
+  default_scope -> { order created_at: :desc }
   scope :between, -> (sender_id, recipient_id) do
     where(sender_id: sender_id, recipient_id: recipient_id).or(
       where(sender_id: recipient_id, recipient_id: sender_id)

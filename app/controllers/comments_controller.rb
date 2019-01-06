@@ -10,10 +10,8 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.save
         format.html { redirect_to @post }
-        format.json { render :show, status: :created, location: @post }
       else
         format.html { render @post }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -28,10 +26,8 @@ class CommentsController < ApplicationController
     respond_to do |format|
       if @comment.update_attributes comment_params
         format.html { redirect_to @post }
-        format.json { render :show, status: :ok, location: @post }
       else
         format.html { render :edit }
-        format.json { render json: @comment.errors, status: :unprocessable_entity }
       end
     end
   end
