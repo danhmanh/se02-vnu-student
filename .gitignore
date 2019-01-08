@@ -40,3 +40,5 @@ config/environments/*.local.yml
 
 # Ignore IDEA hidden files
 .idea/
+
+/public/uploads

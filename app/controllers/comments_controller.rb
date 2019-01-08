@@ -3,40 +3,47 @@ class CommentsController < ApplicationController
   before_action :find_post, only: %i(new create edit update destroy)
   before_action :find_comment, only: %i(edit update destroy)
 
-  def new
-    @comment = @post.comments.build comment_params
-  end
-
   def create
     @comment = @post.comments.build comment_params
     @comment.user_id = current_user.id
 
-    if @comment.save
-      redirect_to @post
-    else
-      render :new
+    respond_to do |format|
+      if @comment.save
+        format.html { redirect_to @post }
+        format.json { render :show, status: :created, location: @post }
+      else
+        format.html { render @post }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
+      end
     end
   end
+
   def edit
+    respond_to do |format|
+      format.js
+    end
   end
 
   def update
-    if @comment.update_attributes comment_params
-      redirect_to @post
-    else
-      render :edit
+    respond_to do |format|
+      if @comment.update_attributes comment_params
+        format.html { redirect_to @post }
+        format.json { render :show, status: :ok, location: @post }
+      else
+        format.html { render :edit }
+        format.json { render json: @comment.errors, status: :unprocessable_entity }
+      end
     end
   end
 
   def destroy
-    if @comment.destroy
-      flash[:success] = "Comment deleted!"
-    else
-      flash[:success] = "Can not delete this comment."
+    @comment.destroy
+    respond_to do |format|
+      format.js
     end
     redirect_to @post
   end
-  
+
   private
 
   def comment_params

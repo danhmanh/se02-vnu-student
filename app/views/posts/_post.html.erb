@@ -1,0 +1,36 @@
+<li id="post-<%= post.id %>">
+  <span class="user">
+    <div class="gravatar-user">
+      <% if post.user.avatar? %>
+        <%= image_tag post.user.avatar.thumb.url, class: "img-avatar" %>
+      <% else %>
+        <%= gravatar_for post.user, size: 40 %>
+      <% end %>
+    </div>
+
+    <%= link_to post.user.name, user_path(post.user) %>
+
+    <span class="timestamp">
+      <%= link_to "Posted " + time_ago_in_words(post.created_at) + " ago.", post %>
+    </span>
+  </span>
+
+  <span class="content">
+    <%= post.content %>
+    <%= image_tag post.picture.url if post.picture? %>
+  </span>
+
+  <div class="like-btn">
+    <% pre_like = post.likes.find { |like| like.user_id == current_user.id} %>
+
+    <% if pre_like %>
+      <%= link_to image_tag("liked.svg"), post_like_path(post, pre_like), class: "like", method: :delete, remote: true %>
+    <% else %>
+      <%= link_to image_tag("like.svg"), post_likes_path(post), class: "like", method: :post, remote: true %>
+    <% end %>
+
+    <span class="counter" id="post-counter-<%= post.id %>">
+      <%= pluralize(post.likes.count, "like") %>
+    </span>
+  </div>
+</li>

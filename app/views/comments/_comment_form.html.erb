@@ -1,0 +1,3 @@
+<%= form_for([post, comment], remote: true) do |f| %>
+  <%= f.text_field :content, placeholder: "Add a comment...", class: "form-control comment-content", id: "comment-content-#{post.id}"  %>
+<% end %>

@@ -1,0 +1,6 @@
+<%= form_for(@user, html: { multipart: true }, remote: true) do |f| %>
+  <span class="avatar">
+    <%= f.file_field :avatar, class: "picture-field" %>
+  </span>
+  <%= f.submit "Update Avatar", class: "form-control btn btn-primary" %>
+<% end %>

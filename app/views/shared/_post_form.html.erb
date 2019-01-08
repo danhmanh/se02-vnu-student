@@ -1,0 +1,13 @@
+<%= form_for @post, remote: true do |f| %>
+  <%= render "shared/error_messages" %>
+
+  <div class="field">
+    <%= f.text_area :content, placeholder: "What's on your mind?", class: "form-control text-area", rows: 3 %>
+  </div>
+
+  <span class="picture">
+    <%= f.file_field :picture, accept: "image/jpeg,image/gif,image/png", class: "picture-field" %>
+  </span>
+
+  <%= f.submit "Post", class: "form-control btn btn-primary" %>
+<% end %>

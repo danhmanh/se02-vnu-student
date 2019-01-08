@@ -1,10 +1,27 @@
-<div class="comment">
-  <div class="username"><%= comment.user.name %></div>
-  <em class="time-ago"><%= time_ago_in_words(comment.created_at) %> ago</em>
-  <p class="comment-content"><%= comment.content %></p>
+<% if comment.user_id.present? %>
+  <div id="comment-<%= comment.id %>" class="current-comment">
+    <div id="comment">
+      <div class="user-name">
+        <div class="gravatar-user">
+          <% if comment.user.avatar? %>
+            <%= image_tag comment.user.avatar.thumb.url, class: "img-avatar" %>
+          <% else %>
+            <%= gravatar_for post.user, size: 40 %>
+          <% end %>
+        </div>
+        <%= link_to comment.user.name, user_path(comment.user) %>
+        <div class="timestamp"><%= time_ago_in_words(comment.created_at).capitalize %> ago.</div>
+      </div>
 
-  <% if comment.user_id == current_user.id %>
-    <%= link_to "Edit", edit_post_comment_path(comment.post, comment) %>
-    <%= link_to "Delete", post_comment_path(comment.post, comment), method: :delete, data: { confirm: "Are you sure?" } %>
-  <% end %>
-</div>
+      <div class="content" >
+        <%= comment.content %>
+      </div>
+
+      <% if comment.user == current_user %>
+        <%= link_to "Edit", edit_post_comment_path(post, comment), remote: true %>
+        <%= link_to "Delete", post_comment_path(post, comment), method: :delete, data: { confirm: "Are you sure?" }, remote: true %>
+      <% end %>
+      <div id="comment-id-<%= comment.id %>"></div>
+    </div>
+  </div>
+<% end %>
