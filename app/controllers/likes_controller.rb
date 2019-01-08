@@ -14,7 +14,6 @@ class LikesController < ApplicationController
         
         if @like.save
           format.html { redirect_back fallback_location: root_path }
-          format.json { render json: { likes: @post.likes.count } }
         else
           format.html { redirect_back fallback_location: root_path  }
         end
@@ -32,7 +31,6 @@ class LikesController < ApplicationController
       else
         @like.destroy
         format.html { redirect_back fallback_location: root_path }
-        format.json { head :no_content }
       end
     end
   end

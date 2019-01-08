@@ -1,0 +1,8 @@
+<li>
+  <% if user.avatar? %>
+    <%= image_tag user.avatar.thumb.url, class: "img-avatar" %>
+  <% else %>
+    <%= gravatar_for user, size: 40 %>
+  <% end %>
+  <%= link_to user.name, user %>
+</li>

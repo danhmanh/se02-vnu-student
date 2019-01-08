@@ -7,7 +7,11 @@ Rails.application.routes.draw do
   get "/chatroom", to: "messages#index"
   root "static_pages#home"
 
-  resources :users
+  resources :users do
+    member do
+      resources :followings, :followers, only: :index
+    end
+  end
 
   resources :posts do
     resources :comments
@@ -21,4 +25,6 @@ Rails.application.routes.draw do
       post :close
     end
   end
+
+  resources :relationships, only: [:create, :destroy]
 end

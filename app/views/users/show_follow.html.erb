@@ -9,28 +9,22 @@
             <%= gravatar_for @user, size: 150 %>
           <% end %>
         </div>
-        <div class="username"><%= @user.name %></div>
+        <div class="username"><%= link_to @user.name, @user %></div>
 
         <section class="stats">
           <%= render "shared/stats" %>
         </section>
-
-        <% if @user.id == current_user.id %>
-          <%= render "user_form" %>
-        <% end%>
-
-        <%= render "follow_form" if logged_in? %>
       </div>
     </section>
   </aside>
 
   <div class="col-md-9">
-    <% if @user.posts.any? %>
-      <div class="post-title">Posts (<%= @user.posts.count %>)</div>
-      <ol class="posts">
-        <%= render @posts %>
-      </ol>
-      <%= paginate @posts, theme: "twitter-bootstrap-3" %>
+    <h3><%= @title %></h3>
+    <% if @users.any? %>
+      <ul class="show_user_info follow">
+        <%= render @users %>
+      </ul>
+      <%= paginate @users, theme: "twitter-bootstrap-3" %>
     <% end %>
   </div>
 </div>

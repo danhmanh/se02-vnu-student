@@ -3,24 +3,21 @@ class UsersController < ApplicationController
   before_action :find_user
 
   def show
+    @create_relationship = current_user.active_relationships.build
+    @destroy_relationship = current_user.active_relationships.find_by followed_id: @user.id
     @posts = @user.posts.page(params[:page])
       .per Settings.size_page_max_length
   end
 
   def edit
-    respond_to do |format|
-      format.js
-    end
   end
 
   def update
     respond_to do |format|
       if @user.update_attributes user_params
         format.html { redirect_to user_path }
-        format.json { render :show, status: :ok, location: user_path }
       else
         format.html { render :edit }
-        format.json { render json: @user.errors, status: :unprocessable_entity }
       end
     end
   end
@@ -35,7 +32,7 @@ class UsersController < ApplicationController
     @user = User.find_by id: params[:id]
 
     return if @user
-    flash[:danger] = "Cannot find this user"
+    flash[:danger] = "User not found!"
     redirect_to root_path
   end
 end
