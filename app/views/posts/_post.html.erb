@@ -9,6 +9,7 @@
     </div>
 
     <%= link_to post.user.name, user_path(post.user) %>
+    <%= link_to " > #{post.group.course.name}", group_path(post.group) if post.group %>
 
     <span class="timestamp">
       <%= link_to "Posted " + time_ago_in_words(post.created_at) + " ago.", post %>

@@ -9,10 +9,6 @@ module UserCoursesHelper
   end
 
   def crawl_courses page
-    if page.search("table").nil?
-      log_in_vnu
-    end
-
     rows = page.search("table")[2].search("tr")
       1.upto(rows.size - 2) do |index|
         str_id = rows[index].search("td")[6].text.strip
@@ -55,11 +51,13 @@ module UserCoursesHelper
           start_time: time[1],
           duration: duration[1],
           course_id: course.id
-          )
+        )
         course.user_courses.find_or_create_by!(user_id: current_user.id)
       end
     end
   end
+
+  private
 
   def get_time row
     time = row.search("td")[8].text.strip

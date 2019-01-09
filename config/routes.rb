@@ -27,4 +27,5 @@ Rails.application.routes.draw do
   end
 
   resources :relationships, only: [:create, :destroy]
+  resources :groups, only: %i(index show)
 end

@@ -7,6 +7,7 @@ class PostsController < ApplicationController
 
     respond_to do |format|
       if @post.save
+        format.html { redirect_to group_path(@post.group) } if @post.group
         format.html { redirect_to root_path }
       else
         @feed_items = []
@@ -46,7 +47,7 @@ class PostsController < ApplicationController
   private
 
   def post_params
-    params.require(:post).permit :content, :picture
+    params.require(:post).permit :content, :picture, :group_id
   end
 
   def find_post
