@@ -2,7 +2,7 @@ var conversations = $('#conversations-list');
 var conversation = conversations.find("[data-conversation-id='" + "<%= @conversation.id %>" + "']");
 
 if (conversation.length !== 1) {
-  conversations.append("<%= j(render 'conversations/conversation', conversation: @conversation, user: current_user) %>");
+  conversations.prepend("<%= j(render 'conversations/conversation', conversation: @conversation, user: current_user) %>");
   conversation = conversations.find("[data-conversation-id='" + "<%= @conversation.id %>" + "']");
 }
 
