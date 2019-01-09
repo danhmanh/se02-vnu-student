@@ -14,18 +14,31 @@ module SessionsHelper
     result
   end
 
-  def get_student_name page
+  def get_groups
+    current_user.courses.each do |course|
+      if course.group.nil?
+        group = course.create_group(course_id: course.id)
+      else
+        group = course.group
+      end
+
+      current_user.user_groups.find_or_create_by(group_id: group.id)
+    end
+  end
+
+  def get_student_name(page)
     student_info = page.search("span.user-name").text.strip
     student_info[10..40].strip
   end
 
-  def log_in page
+  def log_in(page)
     str_id = params[:session][:str_id]
     name = get_student_name page
     user = User.find_by_str_id str_id
     user = User.create str_id: str_id, name: name if user.nil?
     session[:str_id] = user.str_id
     cookies.signed[:str_id] = user.str_id
+    get_groups
   end
 
   def log_out

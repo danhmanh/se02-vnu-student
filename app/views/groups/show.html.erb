@@ -1,0 +1,33 @@
+<div class="container">
+  <h2 class="text-center"><%= @group.course.name %></h2>
+  <div class="row">
+    <div class="col-md-3">
+      <h3>List members</h3>
+      <div class="well">
+        <% @group.users.each do |user| %>
+          <p><%= link_to user.name, user_path(user) %></p>
+        <% end %>
+      </div>
+    </div>
+    <div class="col-md-6">
+
+      <%= form_for @post do |f| %>
+        <div class="form-group">
+          <%= f.text_field :content, placeholder: "Wanna announce something ?", class: "form-control" %>
+          <%= f.hidden_field :group_id, value: @group.id %>
+        </div>
+        <%= f.submit "Post", class: "btn btn-primary pull-right" %>
+      <% end %>
+      <br><br>
+      <% @posts.each do |post| %>
+        <div class="well">
+          <p><b><%= link_to post.user.name, user_path(post.user) %></b> - <%= time_ago_in_words(post.created_at) %>  ago</p>
+          <hr>
+          <p><%= post.content %></p>
+        </div>
+      <% end %>
+    </div>
+    <div class="col-md-3"></div>
+
+  </div>
+</div>
