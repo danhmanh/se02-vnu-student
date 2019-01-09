@@ -31,6 +31,9 @@
         <%= render @posts %>
       </ol>
       <%= paginate @posts, theme: "twitter-bootstrap-3" %>
+
+      <% else %>
+      <h3>You haven't created any post.</h3>
     <% end %>
   </div>
 </div>
