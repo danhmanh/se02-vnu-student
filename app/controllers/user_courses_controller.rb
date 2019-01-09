@@ -1,4 +1,6 @@
 class UserCoursesController < ApplicationController
+  before_action :logged_in_user
+
   def index
     crawl_data_from_list
     @course_details = []
