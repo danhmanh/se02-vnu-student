@@ -3,21 +3,36 @@ class LikesController < ApplicationController
   before_action :find_like, only: [:destroy]
 
   def create
-    if already_liked?
-      flash[:notice] = "You can't like more than once"
-    else
-      @post.likes.create user_id: current_user.id
+    respond_to do |format|
+      if already_liked?
+        format.html {
+          flash[:danger] = "You can't like more than once"
+          redirect_to root_path
+        }
+      else
+        @like = @post.likes.build user_id: current_user.id
+        
+        if @like.save
+          format.html { redirect_back fallback_location: root_path }
+        else
+          format.html { redirect_back fallback_location: root_path  }
+        end
+      end
     end
-    redirect_to post_path @post
   end
 
   def destroy
-    if !(already_liked?)
-      flash[:notice] = "Cannot unlike"
-    else
-      @like.destroy
+    respond_to do |format|
+      if !(already_liked?)
+        format.html {
+          flash.now[:danger] = "Cannot unlike"
+          redirect_to root_path
+        }
+      else
+        @like.destroy
+        format.html { redirect_back fallback_location: root_path }
+      end
     end
-    redirect_to post_path @post
   end
 
   private

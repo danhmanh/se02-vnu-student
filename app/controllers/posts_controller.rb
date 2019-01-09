@@ -1,23 +1,19 @@
 class PostsController < ApplicationController
-  before_action :logged_in_user, except: %i(index)
+  before_action :logged_in_user
   before_action :find_post, only: %i(show edit update destroy)
-
-  def index
-    @posts = Post.all.order("created_at DESC").page(params[:page])
-      .per Settings.size_page_max_length
-  end
-
-  def new
-    @post = current_user.posts.build
-  end
 
   def create
     @post = current_user.posts.build post_params
 
-    if @post.save
-      redirect_to @post
-    else
-      render :new
+    respond_to do |format|
+      if @post.save
+        format.html { redirect_to group_path(@post.group) } if @post.group
+        format.html { redirect_to root_path }
+      else
+        @feed_items = []
+        format.html { redirect_to root_path }
+        format.js
+      end
     end
   end
 
@@ -25,30 +21,33 @@ class PostsController < ApplicationController
   end
 
   def edit
+    respond_to do |format|
+      format.js
+    end
   end
 
   def update
-    if @post.update_attributes post_params
-      flash[:success] = "Post updated!"
-      redirect_to @post
-    else
-      render :edit
+    respond_to do |format|
+      if @post.update_attributes post_params
+        format.html { redirect_to @post }
+      else
+        format.html { render :edit }
+      end
     end
   end
 
   def destroy
-    if @post.destroy
-      flash[:success] = "Post deleted!"
-    else
-      flash[:success] = "Can not delete this post."
+    @post.destroy
+    respond_to do |format|
+      format.js
     end
-    redirect_to posts_path
+    redirect_to root_path
   end
 
   private
 
   def post_params
-    params.require(:post).permit :content
+    params.require(:post).permit :content, :picture, :group_id
   end
 
   def find_post

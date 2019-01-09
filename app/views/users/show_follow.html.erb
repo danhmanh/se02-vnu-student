@@ -1,0 +1,30 @@
+<div class="row">
+  <aside class="col-md-3">
+    <section class="user_info">
+      <div class="profile">
+        <div class="avatar">
+          <% if @user.avatar? %>
+            <%= image_tag @user.avatar.url %>
+          <% else %>
+            <%= gravatar_for @user, size: 150 %>
+          <% end %>
+        </div>
+        <div class="username"><%= link_to @user.name, @user %></div>
+
+        <section class="stats">
+          <%= render "shared/stats" %>
+        </section>
+      </div>
+    </section>
+  </aside>
+
+  <div class="col-md-9">
+    <h3><%= @title %></h3>
+    <% if @users.any? %>
+      <ul class="show_user_info follow">
+        <%= render @users %>
+      </ul>
+      <%= paginate @users, theme: "twitter-bootstrap-3" %>
+    <% end %>
+  </div>
+</div>
