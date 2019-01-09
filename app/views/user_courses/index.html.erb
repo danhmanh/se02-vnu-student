@@ -1,11 +1,10 @@
-<h3>Crawl dữ liệu thành công.</h3>
- <h3>Bạn đã đăng kí tổng cộng <%= current_user.user_courses.count %> môn học</h3>
- <table class="table table-hover table-bordered">
+<h1>Bạn đã đăng kí tổng cộng <%= current_user.user_courses.count %> môn học</h1>
+<table class="table table-hover table-bordered">
   <thead>
     <tr>
-      <th></th>
+      <th class="col-xs-1"></th>
       <% 1.upto(10) do |index| %>
-        <th><%= index %></th>
+        <th class="col-xs-1"><%= index %></th>
       <% end %>
     </tr>
   </thead>

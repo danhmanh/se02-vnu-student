@@ -1,15 +1,15 @@
 <% if logged_in? %>
-  <div class=gravatar-user">
-    <% if current_user.avatar? %>
-      <%= image_tag current_user.avatar.url %>
-    <% else %>
-      <%= gravatar_for current_user, size: 50 %>
-    <% end %>
-  </div>
   <div class="row">
     <aside class="col-md-4">
       <section class="user_info">
-        <h3><%= current_user.name %></h3>
+        <div class="gravatar-user">
+          <% if current_user.avatar? %>
+            <%= image_tag current_user.avatar.thumb.url %>
+          <% else %>
+            <%= gravatar_for current_user, size: 50 %>
+          <% end %>
+          <span class="username"><%= current_user.name %></span>
+        </div>
       </section>
 
       <section class="post_form">

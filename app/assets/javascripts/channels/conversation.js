@@ -4,13 +4,13 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
   disconnected: function() {},
 
   received: function(data) {
-    let conversation = $('#conversations-list').find("[data-conversation-id='" + data['conversation_id'] + "']");
+    var conversation = $('#conversations-list').find("[data-conversation-id='" + data['conversation_id'] + "']");
 
     if (data['window'] !== undefined) {
-      let conversation_visible = conversation.is(':visible');
+      var conversation_visible = conversation.is(':visible');
 
       if (conversation_visible) {
-        let messages_visible = (conversation).find('.panel-body').is(':visible');
+        var messages_visible = (conversation).find('.panel-body').is(':visible');
 
         if (!messages_visible) {
           conversation.removeClass('panel-default').addClass('panel-success');
@@ -18,7 +18,7 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
         conversation.find('.messages-list').find('ul').append(data['message']);
       }
       else {
-        $('#conversations-list').append(data['window']);
+        $('#conversations-list').prepend(data['window']);
         conversation = $('#conversations-list').find("[data-conversation-id='" + data['conversation_id'] + "']");
         conversation.find('.panel-body').toggle();
       }
@@ -27,8 +27,8 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
       conversation.find('ul').append(data['message']);
     }
 
-    let messages_list = conversation.find('.messages-list');
-    let height = messages_list[0].scrollHeight;
+    var messages_list = conversation.find('.messages-list');
+    var height = messages_list[0].scrollHeight;
     messages_list.scrollTop(height);
   },
 
@@ -42,7 +42,7 @@ App.conversation = App.cable.subscriptions.create("ConversationChannel", {
 $(document).on('keypress', '.new_message', function(e) {
   if(e.keyCode == 13){
     e.preventDefault();
-    let values = $(this).serializeArray();
+    var values = $(this).serializeArray();
     App.conversation.speak(values);
     $(this).trigger('reset');
   }

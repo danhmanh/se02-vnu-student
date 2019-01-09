@@ -9,25 +9,30 @@
         <% end %>
       </div>
     </div>
-    <div class="col-md-6">
 
-      <%= form_for @post do |f| %>
+    <div class="col-md-6">
+      <%= form_for @post, remote: true do |f| %>
         <div class="form-group">
+          <%= render "shared/error_messages" %>
           <%= f.text_field :content, placeholder: "Wanna announce something ?", class: "form-control" %>
           <%= f.hidden_field :group_id, value: @group.id %>
         </div>
+        <span class="picture">
+          <%= f.file_field :picture, accept: "image/jpeg,image/gif,image/png", class: "picture-field" %>
         <%= f.submit "Post", class: "btn btn-primary pull-right" %>
+        </span>
       <% end %>
+
       <br><br>
-      <% @posts.each do |post| %>
-        <div class="well">
-          <p><b><%= link_to post.user.name, user_path(post.user) %></b> - <%= time_ago_in_words(post.created_at) %>  ago</p>
-          <hr>
-          <p><%= post.content %></p>
-        </div>
+      <% if @group.posts.any? %>
+        <ol class="posts">
+          <%= render @posts %>
+        </ol>
+        <%= paginate @posts, theme: "twitter-bootstrap-3" %>
+      <% else %>
+        <h3>You haven't created any post.</h3>
       <% end %>
     </div>
     <div class="col-md-3"></div>
-
   </div>
 </div>
