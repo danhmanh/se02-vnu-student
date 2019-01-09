@@ -32,7 +32,7 @@ có thể tạo post và mọi người có thể để lại bình luận.
 * __Tổng hợp kết quả học tập__ (đang phát triển): Tổng hợp lại điểm số, số tín chỉ
 của sinh viên và trình bày trực quan (biểu đồ, ...)
 
-* __Thời khoá biểu__ (đang phát triển): Sắp xếp thời khoá biểu dựa theo danh sách
+* __Thời khoá biểu__ : Sắp xếp thời khoá biểu dựa theo danh sách
 đăng kí môn có sẵn
 
 * __Tạo nhóm học tín chỉ__ (đang phát triển): Tự động tập hợp các sinh viên học cùng
