@@ -35,7 +35,7 @@ của sinh viên và trình bày trực quan (biểu đồ, ...)
 * __Thời khoá biểu__ : Sắp xếp thời khoá biểu dựa theo danh sách
 đăng kí môn có sẵn
 
-* __Tạo nhóm học tín chỉ__ (đang phát triển): Tự động tập hợp các sinh viên học cùng
+* __Tạo nhóm học tín chỉ__ : Tự động tập hợp các sinh viên học cùng
 một lớp tín chỉ vào 1 nhóm (group như Facebook) để mọi người có thể dễ dàng chia sẻ
 thông báo cũng như tài liệu học tập, ...
 
